@@ -30,7 +30,7 @@ public class Flight {
 
     //One To Many
     //Having the MappedBy = weaker/non-dominant class
-    @OneToMany(mappedBy = "flights")
+    @ManyToMany(mappedBy = "flights")
     @JsonIgnoreProperties({"flights"})
     private List<Passenger> passengers;
 

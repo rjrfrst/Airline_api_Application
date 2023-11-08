@@ -13,13 +13,10 @@ public class FlightService {
 
     @Autowired
     FlightRepository flightRepository;
-    @Autowired
-    PassengerService passengerService;
 
     //Sava a flight in the db
-    public Flight saveFlight(Flight flight){
+    public void saveFlight(Flight flight){
         flightRepository.save(flight);
-        return flight;
     }
 
     //Get details of all flights
@@ -29,8 +26,13 @@ public class FlightService {
 
     //Get details of a specific flight
     //I will need to have the id of the flight
-    public Optional<Flight> getFlightById(long id){
-        return flightRepository.findById(id);
+    public Flight getFlightById(long id){
+        return flightRepository.findById(id).get();
+    }
+
+    // Delete/Cancel a flight
+    public void deleteFlight(long id){
+        flightRepository.deleteById(id);
     }
 
 
