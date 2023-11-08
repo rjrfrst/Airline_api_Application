@@ -1,7 +1,10 @@
 package com.example.airline_api.services;
 
 import com.example.airline_api.models.Flight;
+import com.example.airline_api.models.FlightDTO;
+import com.example.airline_api.models.Passenger;
 import com.example.airline_api.repositories.FlightRepository;
+import com.example.airline_api.repositories.PassengerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,9 @@ public class FlightService {
 
     @Autowired
     FlightRepository flightRepository;
+
+    @Autowired
+    PassengerRepository passengerRepository;
 
     //Sava a flight in the db
     public void saveFlight(Flight flight){
@@ -35,6 +41,16 @@ public class FlightService {
         flightRepository.deleteById(id);
     }
 
+    //
+    public void addPassengerToFlight(Long passengerId, Long flightId){
+        Flight flight = flightRepository.findById(flightId).get();
+        Passenger passenger = passengerRepository.findById(passengerId).get();
+
+        passenger.addFlight(flight); //Method created in passenger.model
+        passengerRepository.save(passenger);
+
+
+    }
 
 
 } //Last curly bracket

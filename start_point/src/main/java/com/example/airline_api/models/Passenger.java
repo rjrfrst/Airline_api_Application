@@ -73,4 +73,9 @@ public class Passenger {
         this.flights = flights;
     }
 
+    //method
+    public void addFlight(Flight flight ){
+        this.flights.add(flight);
+    }
+
 } //Last curly bracket

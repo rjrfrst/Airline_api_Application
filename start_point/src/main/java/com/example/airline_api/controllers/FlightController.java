@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.event.HyperlinkEvent;
 import java.util.List;
 
 @RestController
@@ -41,9 +42,13 @@ public class FlightController {
     }
 
     // Book passenger on a flight
-    @PatchMapping(value = "/{id}")
-    public ResponseEntity<Flight> addPassengerToFlight(){
-        return null;
+    @PatchMapping(value = "/{id}/add-passenger") //add path
+    public ResponseEntity<Flight> addPassengerToFlight(
+            @RequestBody Long passengerId,
+            @PathVariable Long id
+    ){
+        flightService.addPassengerToFlight(passengerId, id);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     // Cancel flight
